@@ -1,5 +1,6 @@
 import { KeyboardEvent, useState } from "react";
 import { useUser } from "../app/contexts/UserContext";
+import { useTheme } from "../app/contexts/ThemeContext";
 
 export const NameInput = () => {
     const userCtx = useUser();
@@ -13,14 +14,21 @@ export const NameInput = () => {
         }
     }
 
+    const themeCtx = useTheme();
+
     return (
         <div className="mt-14">
             <p className="text-xl mb-4">Qual seu nome?</p>
             <div className="flex gap-3 items-center text-lg">
                 <input 
                     type="text" 
-                    className="flex-1 border border-white/30 rounded-md
-                    px-4 py-3 text-white bg-white/10 outline-none"
+                    className={`flex-1 border rounded-md
+                    px-4 py-3 outline-none
+                        ${themeCtx?.theme === 'light' ? 
+                            'border-gray-800 text-black' :
+                            'border-white/30 bg-white/10 text-white' 
+                        }
+                    `}
                     value={nameInput}
                     onChange={e => setNameInput(e.target.value)}
                     onKeyUp={handleKeyUpAction}

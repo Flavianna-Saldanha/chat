@@ -1,5 +1,6 @@
 import { KeyboardEvent, useState } from "react";
 import { useChat } from "../app/contexts/ChatContext";
+import { useTheme } from "../app/contexts/ThemeContext";
 
 type Props = {
     name: string;
@@ -18,9 +19,16 @@ export const ChatInput = ({name}: Props) => {
         }
     }
 
+    const themeCtx = useTheme();
+
     return(
         <input 
-            className="w-full bg-transparent text-white text-md outline-none"
+            className={`w-full bg-transparent text-md outline-none
+                    ${themeCtx?.theme === 'light' ?
+                        'text-black placeholder:text-black' :
+                        'text-white placeholder:text-white'
+                    }
+                `}
             placeholder={`${name}, digite uma mensagem (e aperte enter)`}
             value={textInput}
             onChange={e => setTextInput(e.target.value)}
