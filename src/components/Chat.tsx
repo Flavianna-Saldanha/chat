@@ -6,11 +6,11 @@ import { NameInput } from "./NameInput";
 
 export const Chat = () => {
     const userCtx = useUser();
+    const themeCtx = useTheme();
 
     if(!userCtx) return null;
     if(!userCtx.user) return <NameInput />
 
-    const themeCtx = useTheme();
 
     return (
         <div className={`border rounded-md mt-5
